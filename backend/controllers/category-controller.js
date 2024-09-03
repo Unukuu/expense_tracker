@@ -2,7 +2,7 @@ const sql = require("../config/db");
 
 const getAllCategory = async (req, res) => {
   try {
-    const data = await sql`SELECT * FROM category`;
+    const data = await sql`SELECT * FROM category;`;
     console.log("DATA", data);
     res.status(200).json({ message: "success", user: data });
   } catch (error) {
