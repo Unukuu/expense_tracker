@@ -1,4 +1,15 @@
+import { axios } from "axios";
+import { useRouter } from "next/router";
 const SignUp = () => {
+  const router = useRouter();
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    repassword: "",
+  });
+  const [image, setImage] = useState(null);
+
   return (
     <>
       <div className="flex h-screen">
@@ -9,11 +20,11 @@ const SignUp = () => {
           <input className="border" type="email" placeholder="Email" />
           <input className="border" type="email" placeholder="Password" />
           <button className="bg-[#0166FF] text-white text-xl rounded-2xl p-3">
-            Sign Up
+            Sign up
           </button>
           <p>
             Already have account?
-            <a className="text-primary" href="/">
+            <a className="text-primary" href="/signin">
               Sign in
             </a>
           </p>
