@@ -7,7 +7,7 @@ import { apiUrl } from "../../../../utils/util";
 import { toast } from "react-toastify";
 
 const SignIn = () => {
-  const router = useRouter;
+  const router = useRouter();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -21,7 +21,7 @@ const SignIn = () => {
       });
       if (res.status === 200) {
         toast.success("Амжилттай нэвтэрлээ", { autoClose: 1000 });
-        const { token } = response.data;
+        const { token } = res.data;
         localStorage.setItem("token", token);
         router.push("/dashboard");
       }
