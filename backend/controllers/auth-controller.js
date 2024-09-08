@@ -38,5 +38,6 @@ const signIn = async (req, res) => {
     console.log(error);
     res.status(404).json({ message: "error", user: error });
   }
+  console.log(req.body);
 };
 module.exports = { signIn, signUp };
