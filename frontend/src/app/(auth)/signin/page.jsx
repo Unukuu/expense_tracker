@@ -19,6 +19,7 @@ const SignIn = () => {
         email,
         password,
       });
+      console.log(res);
       if (res.status === 200) {
         toast.success("Амжилттай нэвтэрлээ", { autoClose: 1000 });
         const { token } = res.data;

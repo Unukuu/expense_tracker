@@ -4,10 +4,12 @@ const {
   createUser,
   deleteUser,
   updateUser,
+  getCurrentUser,
 } = require("../controllers/user-controller");
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 const router = Router();
 
+router.route("/info").get(auth, getCurrentUser);
 router.route("/").get(getAllUser).post(createUser);
 router.route("/:id").put(updateUser).delete(deleteUser);
 
