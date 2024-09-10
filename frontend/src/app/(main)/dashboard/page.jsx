@@ -1,7 +1,19 @@
+"use client";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { FaArrowAltCircleDown } from "react-icons/fa";
-import Header from "../../components/header";
+
 import Records from "./records";
+import BarChart from "./barchart";
+import {
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
+} from "chart.js";
+import DoughnurChart from "./donutchart";
+Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 const Dashboard = () => {
   return (
     <>
@@ -38,8 +50,12 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 container m-auto gap-6">
-          <div className="h-[285px] bg-red-400 rounded-2xl"></div>
-          <div className="h-[285px] bg-blue-400 rounded-2xl"></div>
+          <div className="h-[285px] rounded-2xl">
+            <BarChart />
+          </div>
+          <div className="h-[285px]  rounded-2xl">
+            <DoughnurChart />
+          </div>
         </div>
         <Records />
       </div>
