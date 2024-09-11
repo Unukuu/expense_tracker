@@ -1,3 +1,5 @@
+import AddRecord from "./modal/addrecord";
+
 const Header = ({ user, logOut }) => {
   console.log(user);
   return (
@@ -18,7 +20,12 @@ const Header = ({ user, logOut }) => {
         </a>
       </div>
       <div className="flex gap-6 items-center justify-center">
-        <button className="btn bg-[#0166FF] text-white">+ Record</button>
+        <button
+          className="btn bg-[#0166FF] text-white"
+          onClick={() => document.getElementById("my_modal_1").showModal()}
+        >
+          + Record
+        </button>
         <button className="btn bg-[#0166FF] text-white" onClick={logOut}>
           Log out
         </button>
@@ -27,6 +34,7 @@ const Header = ({ user, logOut }) => {
           {user?.name}
         </p>
       </div>
+      <AddRecord user={user} />
     </div>
   );
 };

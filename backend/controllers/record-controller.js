@@ -11,10 +11,10 @@ const getAllRecord = async (req, res) => {
 };
 const createRecord = async (req, res) => {
   try {
-    const { email, name, password, profile_image } = req.body;
+    const { uid, cid, name, amount, transactionType, description } = req.body;
     const newdata =
-      await sql`INSERT INTO users (email, name, password, profile_image)
-VALUES (${email}, ${name}, ${password}, ${profile_image})`;
+      await sql`INSERT INTO record (uid, cid, name, amount, transaction_type, description)
+VALUES (${uid},${cid}, ${name},${amount}, ${transactionType}, ${description})`;
     res.status(201).json({ message: "created", user: newdata });
   } catch (error) {
     res.status(404).json({ message: "error", user: error });
