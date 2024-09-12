@@ -1,8 +1,27 @@
+"use client";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { FaArrowAltCircleDown } from "react-icons/fa";
-import Header from "../../components/header";
+
 import Records from "./records";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { apiUrl } from "../../../../utils/util";
 const Dashboard = () => {
+  const [trans, setTrans] = useState({});
+  const getTransdata = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}/records/info`);
+      console.log(res.data);
+      setTrans(res.data);
+    } catch (error) {
+      console.log("aldaa garlaa", error);
+      toast.error("aldaa garlaa");
+    }
+  };
+  useEffect(() => {
+    getTransdata();
+  }, []);
   return (
     <>
       <div className="bg-gray-50 flex flex-col gap-6 p-8">
@@ -14,7 +33,7 @@ const Dashboard = () => {
               <p className="font-bold">Your Income</p>
             </div>
             <div className="p-6">
-              <h1 className="font-bold text-4xl">1'200'000$</h1>
+              <h1 className="font-bold text-4xl">{trans?.expense?.sum}$</h1>
               <p className="text-slate-500 text-[18px]">Your Income Amount</p>
               <div className="flex items-center gap-2 mt-4">
                 <FaArrowAltCircleUp className="text-[#84CC16] text-[18px]" />
@@ -28,7 +47,7 @@ const Dashboard = () => {
               <p className="font-bold">Your Income</p>
             </div>
             <div className="p-6">
-              <h1 className="font-bold text-4xl">-1'200'000$</h1>
+              <h1 className="font-bold text-4xl">-{trans?.income?.sum}$</h1>
               <p className="text-slate-500 text-[18px]">Your expence Amount</p>
               <div className="flex items-center gap-2 mt-4">
                 <FaArrowAltCircleDown className="text-[#0166FF] text-[18px]" />
