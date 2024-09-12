@@ -7,6 +7,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { apiUrl } from "../../../../utils/util";
+import BarChart from "./barchart";
+import {
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
+} from "chart.js";
+import DoughnurChart from "./donutchart";
+Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 const Dashboard = () => {
   const [trans, setTrans] = useState({});
   const getTransdata = async () => {
@@ -57,8 +68,12 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 container m-auto gap-6">
-          <div className="h-[285px] bg-red-400 rounded-2xl"></div>
-          <div className="h-[285px] bg-blue-400 rounded-2xl"></div>
+          <div className="h-[285px] rounded-2xl">
+            <BarChart />
+          </div>
+          <div className="h-[285px]  rounded-2xl">
+            <DoughnurChart />
+          </div>
         </div>
         <Records />
       </div>
