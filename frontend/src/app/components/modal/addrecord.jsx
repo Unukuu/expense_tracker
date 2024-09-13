@@ -3,9 +3,11 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { apiUrl } from "../../../../utils/util";
 import { toast } from "react-toastify";
+import { ChartdataContext } from "@/app/context/chartdata-context";
 
 const AddRecord = ({ user }) => {
   const { category, fetchCategoryData } = useContext(CategoryContext);
+  const { reFetch, setReFetch } = useContext(ChartdataContext);
   useEffect(() => {
     fetchCategoryData();
   }, []);
@@ -44,6 +46,7 @@ const AddRecord = ({ user }) => {
         }
       );
       toast.success("Амжилттай нэмэгдлээ", { autoClose: 1000 });
+      setReFetch(!reFetch);
     } catch (error) {
       console.log(error);
       toast.error("Алдаа гарлаа");

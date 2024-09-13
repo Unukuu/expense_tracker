@@ -32,7 +32,7 @@ export const CategoryProvider = ({ children }) => {
     if (!category) {
     }
     fetchCategoryData();
-  }, [category?.id]);
+  }, []);
 
   return (
     <CategoryContext.Provider value={{ category, fetchCategoryData }}>

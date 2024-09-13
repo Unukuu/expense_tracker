@@ -3,7 +3,7 @@ import { FaArrowAltCircleUp } from "react-icons/fa";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 
 import Records from "./records";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { apiUrl } from "../../../../utils/util";
@@ -17,27 +17,30 @@ import {
   LinearScale,
 } from "chart.js";
 import DoughnurChart from "./donutchart";
+import { ChartdataContext } from "@/app/context/chartdata-context";
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 const Dashboard = () => {
-  const [trans, setTrans] = useState({});
-  const getTransdata = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}/records/info`);
-      console.log(res.data);
-      setTrans(res.data);
-    } catch (error) {
-      console.log("aldaa garlaa", error);
-      toast.error("aldaa garlaa");
-    }
-  };
+  const { reFetch, trans, getTransdata } = useContext(ChartdataContext);
+
   useEffect(() => {
     getTransdata();
-  }, []);
+  }, [reFetch]);
   return (
     <>
       <div className="bg-gray-50 flex flex-col gap-6 p-8">
         <div className="grid grid-cols-3 container m-auto gap-6">
-          <div className="bg-red-300 h-[216px] rounded-2xl"></div>
+          <div className="bg-[#0166FF] h-[216px] rounded-2xl relative">
+            <img
+              className="absolute w-full h-full rounded-2xl"
+              src="/image/Noise.png"
+              alt=""
+            />
+            <p className="text-white font-extrabold m-9">Geld</p>
+            <div className="text-white m-9">
+              <p className="font-extrabold">Cash</p>
+              <p className="text-4xl">000'000'000$</p>
+            </div>
+          </div>
           <div className="bg-white shadow-xl h-[216px] rounded-2xl ">
             <div className="flex items-center gap-2 py-5 px-6 border-b-2">
               <div className="w-2 h-2 rounded-full bg-[#84CC16]"></div>

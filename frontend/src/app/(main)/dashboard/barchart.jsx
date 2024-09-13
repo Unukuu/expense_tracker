@@ -1,25 +1,12 @@
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
-import { apiUrl } from "../../../../utils/util";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
+import { useContext, useEffect, useState } from "react";
+
+import { ChartdataContext } from "@/app/context/chartdata-context";
 
 const BarChart = ({ barChartData }) => {
-  const [chartData, setChartData] = useState();
-  const getChartdata = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}/records/chart`);
-      console.log("data", res.data);
-      setChartData(res.data);
-    } catch (err) {
-      console.log("aldaa garlaa", err);
-      toast.error("aldaa garlaa");
-    }
-  };
-
-  useEffect(() => {
-    getChartdata();
-  }, []);
+  const { chartData } = useContext(ChartdataContext);
   const data1 = {
     labels: [
       "Jan",

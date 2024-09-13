@@ -1,29 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { toast } from "react-toastify";
 import { apiUrl } from "../../../../utils/util";
+import { ChartdataContext } from "@/app/context/chartdata-context";
 
 const DoughnurChart = ({ categoryData }) => {
-  const [chartData, setChartData] = useState();
-  const getChartdata = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}/records/chart`);
-      console.log("data", res.data.donut);
-      setChartData(res.data.donut);
-    } catch (err) {
-      console.log("aldaa garlaa", err);
-      toast.error("aldaa garlaa aaaaaaa");
-    }
-  };
-
-  useEffect(() => {
-    getChartdata();
-  }, []);
+  const { chartData, getChartdata, reFetch, setReFetch } =
+    useContext(ChartdataContext);
+  // useEffect(() => {
+  //   getChartdata();
+  // }, [reFetch]);
   const data2 = {
     datasets: [
       {
-        data: chartData?.map((data) => data.sum),
+        data: chartData?.donut.map((data) => data.sum),
 
         backgroundColor: [
           "#1C64F2",
@@ -41,7 +32,7 @@ const DoughnurChart = ({ categoryData }) => {
         ],
       },
     ],
-    labels: chartData?.map((data) => data.cat_name),
+    labels: chartData?.donut.map((data) => data.cat_name),
   };
 
   const options2 = {
