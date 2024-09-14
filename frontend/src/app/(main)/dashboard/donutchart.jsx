@@ -1,16 +1,9 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { toast } from "react-toastify";
-import { apiUrl } from "../../../../utils/util";
 import { ChartdataContext } from "@/app/context/chartdata-context";
 
 const DoughnurChart = ({ categoryData }) => {
-  const { chartData, getChartdata, reFetch, setReFetch } =
-    useContext(ChartdataContext);
-  // useEffect(() => {
-  //   getChartdata();
-  // }, [reFetch]);
+  const { chartData } = useContext(ChartdataContext);
   const data2 = {
     datasets: [
       {
@@ -48,8 +41,14 @@ const DoughnurChart = ({ categoryData }) => {
   };
 
   return (
-    <div className=" p-4 bg-white card w-full h-full flex">
+    <div className=" p-4 bg-white w-full h-full card">
       <Doughnut options={options2} data={data2} />
+      {/* {chartData?.donut.map((data) => (
+        <div className="flex gap-4">
+          <p>{data.cat_name}</p>
+          <p>{data.sum}</p>
+        </div>
+      ))} */}
     </div>
   );
 };

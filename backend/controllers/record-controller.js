@@ -2,7 +2,12 @@ const sql = require("../config/db");
 
 const getAllRecord = async (req, res) => {
   try {
-    const data = await sql`SELECT * FROM record`;
+    const { id } = req.user;
+
+    // const { id } = req.params;
+    // console.log("id", id);
+    const data =
+      await sql`SELECT c.name, r.amount,r.transaction_type FROM record r INNER JOIN category c ON r.cid=c.id WHERE r.uid=${id};`;
     console.log("DATA", data);
     res.status(200).json({ message: "success", user: data });
   } catch (error) {

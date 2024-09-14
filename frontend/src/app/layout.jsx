@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./context/user-context";
 import { CategoryProvider } from "./context/category-context";
 import { ChartProvider } from "./context/chartdata-context";
+import { RecordsProvider } from "./context/records-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <UserProvider>
           <ChartProvider>
-            <CategoryProvider>{children}</CategoryProvider>
+            <CategoryProvider>
+              <RecordsProvider>{children}</RecordsProvider>
+            </CategoryProvider>
           </ChartProvider>
         </UserProvider>
 

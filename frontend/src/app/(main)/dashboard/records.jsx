@@ -6,8 +6,6 @@ const RecordList = () => {
         <h1 className="font-bold">Last Records</h1>
       </div>
       <Recordcard />
-      <Recordcard />
-      <Recordcard />
     </div>
   );
 };
